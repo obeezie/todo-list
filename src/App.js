@@ -1,23 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import TodoForm from './components/TodoForm';
+import React, { useState } from 'react'
+import TodoDisplay from './components/TodoDisplay';
+
 
 function App() {
+  const [todo, setTodo] = useState([])
+
+  const receiveTodo = (newTodo) => {
+    setTodo([...todo, newTodo])
+  }
+
+  const updateTodo = (updatedTodo) => {
+    setTodo(updatedTodo)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TodoForm onNewTodo={receiveTodo} />
+      <TodoDisplay todo={todo} onTodoUpdate={updateTodo} />
     </div>
   );
 }
